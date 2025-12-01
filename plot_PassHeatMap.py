@@ -1,19 +1,3 @@
-"""
-Pass heat maps
-===========================
-
-Make a heat map of all teams passes during a tournament.
-In order to add context, we set a window for danger
-passes to be those in 15 seconds leading up to a shot.
-
-..  youtube:: cgn4fvWo5l0
-   :width: 640
-   :height: 349
-
-
-"""
-
-
 #%%
 # We will need these libraries
 
@@ -23,19 +7,27 @@ from mplsoccer import Pitch, Sbopen
 import pandas as pd
 
 #%%
-# Opening the dataset
-# ----------------------------
-#
-# To get games by England Women's team we need to filter them in a dataframe - if they played as a home or away team.
-# We also calculate number of games to normalize the diagrams later on
-
+# Configuring streamlit page
 st.set_page_config(
     page_title="Messi Heatmap Analysis", 
     page_icon="⚽",                     
     layout="wide",
 )
-st.title("⚽ StatsBomb Heatmap App")
-st.write("Visualizing the frequency of events on the pitch.")
+st.title("⚽ Argentina and Saudi Arbia match world cup 2022 StatsBomb Heatmap App")
+
+#%%
+#Hypothesis
+st.write("Despite scoring the opening goal and 
+having a high volume of touches in the final third, Lionel Messi's overall offensive 
+impact was significantly limited by Saudi Arabia's aggressive offside trap and high-pressure
+midfield, which forced him into deeper, less dangerous receiving positions and disrupted
+his ability to create high-value chances for himself and others after the first 15 minutes.")
+
+#%%
+# Opening the dataset
+# ----------------------------
+#
+# To get games by Argentina's team we need to filter them in a dataframe
 
 #open the data
 parser = Sbopen()
@@ -44,13 +36,13 @@ df_match = parser.match(competition_id=43, season_id=106)
 events_df = parser.event(3857300)[0]
 
 # Define team and player identifiers
-argentina_team_name = "Argentina"  
-messi_player_name = "Lionel Andrés Messi Cuccittini" 
+team_name = "Argentina"  
+player_name = "Lionel Andrés Messi Cuccittini" 
 # Filter for Argentina's events
-argentina_events = events_df[events_df['team_name'] == argentina_team_name].copy()
+argentina_events = events_df[events_df['team_name'] == team_name].copy()
 
 final_third_passes = argentina_events[
-    (argentina_events['player_name'] == messi_player_name) &
+    (argentina_events['player_name'] == player_name) &
     (argentina_events['type_name'] == 'Pass') &
     (argentina_events['end_x'] > 80)
 ].copy()
@@ -59,8 +51,8 @@ final_third_passes = argentina_events[
 columns_to_extract = [
     'id', 'period', 'minute', 'second',
     'possession', 'play_pattern_name', 'player_name',
-    'x', 'y',  # Pass start location
-    'end_x', 'end_y',  # Pass end location (for your heatmap!)
+    'x', 'y',  
+    'end_x', 'end_y',  
     'pass_recipient_name', 'outcome_name',
     'pass_assisted_shot_id', 'under_pressure'
 ]
@@ -79,13 +71,11 @@ messi_final_third_passes['led_to_shot'] = messi_final_third_passes['pass_assiste
 pitch = Pitch(line_color='black')
 fig, ax = pitch.grid(grid_height=0.9, title_height=0.06, axis=False,
                      endnote_height=0.04, title_space=0, endnote_space=0)
-#pitch.arrows(df_pass.x, df_pass.y,
-           # df_pass.end_x, df_pass.end_y, color = "blue", ax=ax['pitch'])
 pitch.scatter(messi_final_third_passes.x, messi_final_third_passes.y, alpha = 0.2, s = 500, color = "blue", ax=ax['pitch'])
 fig.suptitle("Lionel Messi passes against Saudi Arabia", fontsize = 30)
 plt.show()
 
-
+#%%
 #plot heat map
 pitch = Pitch(line_zorder=2, line_color='black')
 fig, ax = pitch.grid(grid_height=0.9, title_height=0.06, axis=False,
@@ -105,12 +95,6 @@ cbar = plt.colorbar(pcm, cax=ax_cbar)
 fig.suptitle('Lionel Messi: Pass Receipt Locations in Final Third Argentina vs Saudi Arabia', fontsize = 30, y=0.98)
 plt.show()
 st.pyplot(fig)
-
-#%%
-# Challenge
-# ----------------------------
-# 1) Improve so that only high xG (>0.07) are included!
-# 2) Make a heat map only for Sweden's player who was the most involved in danger passes!
 
 
     
