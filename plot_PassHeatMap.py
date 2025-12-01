@@ -17,11 +17,7 @@ st.title("⚽ Argentina and Saudi Arbia match world cup 2022 StatsBomb Heatmap A
 
 #%%
 #Hypothesis
-st.write("Despite scoring the opening goal and 
-having a high volume of touches in the final third, Lionel Messi's overall offensive 
-impact was significantly limited by Saudi Arabia's aggressive offside trap and high-pressure
-midfield, which forced him into deeper, less dangerous receiving positions and disrupted
-his ability to create high-value chances for himself and others after the first 15 minutes.")
+st.write("Despite scoring the opening goal and having a high volume of touches in the final third, Lionel Messi's overall offensive impact was significantly limited by Saudi Arabia's aggressive offside trap and high-pressure midfield, which forced him into deeper, less dangerous receiving positions and disrupted his ability to create high-value chances for himself and others after the first 15 minutes.")
 
 #%%
 # Opening the dataset
