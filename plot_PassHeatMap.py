@@ -101,7 +101,7 @@ key_points = [
     "Inability to Reach High-Value Zones",
     "Compressed Passing Options"
 ]
-markdown_list = "\n".join([f"- {item}" for item in key_points])
+markdown_list = "\n".join([f"- **{item}**" for item in key_points])
 st.markdown(markdown_List)
     
 
