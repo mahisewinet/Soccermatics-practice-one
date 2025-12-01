@@ -102,7 +102,7 @@ key_points = [
     "Compressed Passing Options"
 ]
 markdown_list = "\n".join([f"- **{item}**" for item in key_points])
-st.markdown(markdown_List)
+st.markdown(markdown_list)
     
 
 
