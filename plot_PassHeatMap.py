@@ -16,10 +16,6 @@ st.set_page_config(
 st.title("⚽ Argentina and Saudi Arbia match world cup 2022 StatsBomb Heatmap App")
 
 #%%
-#Hypothesis
-st.write("Despite scoring the opening goal and having a high volume of touches in the final third, Lionel Messi's overall offensive impact was significantly limited by Saudi Arabia's aggressive offside trap and high-pressure midfield, which forced him into deeper, less dangerous receiving positions and disrupted his ability to create high-value chances for himself and others after the first 15 minutes.")
-
-#%%
 # Opening the dataset
 # ----------------------------
 #
@@ -92,17 +88,6 @@ fig.suptitle('Lionel Messi: Pass Receipt Locations in Final Third Argentina vs S
 plt.show()
 st.pyplot(fig)
 
-#%%
-#Heat map interpretation
-st.title("Heatmap Results")
-st.write("The pass receipt heatmap provides compelling visual evidence supporting the hypothesis that Saudi Arabia's tactics limited Messi's effectiveness. The heatmap reveals that while Messi successfully delivered passes into the final third , the distribution within these zones demonstrates Saudi Arabia's effective defensive containment:")
-key_points = [
-    "Lack of Penetration into Most Dangerous Areas",
-    "Inability to Reach High-Value Zones",
-    "Compressed Passing Options"
-]
-markdown_list = "\n".join([f"- **{item}**" for item in key_points])
-st.markdown(markdown_list)
     
 
 
