@@ -93,7 +93,7 @@ with tab1:
     st.pyplot(fig)
 
 with tab2:
-    print('Hello world')
+    st.write('Hello world')
     
 
 
