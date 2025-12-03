@@ -15,7 +15,7 @@ st.set_page_config(
 )
 st.title("⚽ Argentina and Saudi Arbia match world cup 2022 StatsBomb Heatmap App")
 
-tab_titless = ["Individual","Comparision"]
+tab_titles = ["Individual","Comparision"]
 tab1, tab2 = st.tabs(tab_titles)
 
 #%%
